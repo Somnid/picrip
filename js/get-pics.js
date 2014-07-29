@@ -1,4 +1,4 @@
 (function(){
   var images = Picrip.findAllImages();
-  chrome.runtime.sendMessage({ event : "got-images", data : images });
+  chrome.runtime.sendMessage({ event : "got-pics"  });
 })();
