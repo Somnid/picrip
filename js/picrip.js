@@ -3,6 +3,7 @@ var Picrip = (function(){
     var imageUrls = [];
     imageUrls = imageUrls.concat(getAllImageTagSrcs());
     imageUrls = imageUrls.concat(getAllBackgroundImages());
+    imageUrls = dedupe(imageUrls);
     return imageUrls;
   }
   function getAllImageTagSrcs(){
@@ -14,7 +15,17 @@ var Picrip = (function(){
     return urls;
   }
   function getAllBackgroundImages(){
-    return [];
+    var imageUrls = [];
+    var allElements = document.querySelectorAll("*");
+    for(var i = 0; i < allElements.length; i++){
+      var element = allElements[i];
+      var style = getComputedStyle(element, null).getPropertyValue("background-image");
+      if(style != "none"){
+        var url = extractCssUrl(style);
+        imageUrls.push(url);
+      }
+    }
+    return imageUrls;
   }
   function createImageList(images){
     var docfrag = document.createDocumentFragment();
@@ -25,8 +36,19 @@ var Picrip = (function(){
     });
     return docfrag;
   }
+  function extractCssUrl(background){
+    var reg = /(?:\(['|"]?)(.*?)(?:['|"]?\))/
+    return reg.exec(background)[1];
+  }
+  function dedupe(a) {
+    var seen = {};
+    return a.filter(function(item) {
+        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+    });
+  }
   return {
     findAllImages : findAllImages,
-    createImageList : createImageList
+    createImageList : createImageList,
+    _getAllBackgroundImages : getAllBackgroundImages
   };
 })();

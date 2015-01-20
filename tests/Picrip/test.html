@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>Thing Tests</title>
+		<link rel="stylesheet" href="../css/qunit-1.16.0.css" />
+		<style>
+		  #bg {
+		    background-image: url(background-pic2.png);
+		  }
+		</style>
+	</head>
+	<body>
+		<div id="qunit"></div>
+		<div id="qunit-fixture">
+		  <div style="background-image: url(background-pic1.png)"></div>
+		  <div id="bg"></div>
+		</div>
+		<script src="../js/qunit-1.16.0.js"></script>
+		<script src="../js/sinon.js"></script>
+		<script src="../js/sinon-qunit.js"></script>
+		<script src="../../js/picrip.js"></script><!--Script to test-->
+		<script src="test.js"></script>
+	</body>
+</html>
