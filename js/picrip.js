@@ -18,10 +18,10 @@ var Picrip = (function(){
   }
   function createImageList(images){
     var docfrag = document.createDocumentFragment();
-    images.foreach(function(image){
-      var img = document.createElement("img");
-      img.src = image;
-      docfrag.appendChild(image);
+    images.foreach(function(imageUrl){
+      var imageElement = document.createElement("img");
+      imageElement.src = imageUrl;
+      docfrag.appendChild(imageElement);
     });
     return docfrag;
   }

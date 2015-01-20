@@ -1,15 +1,22 @@
 chrome.browserAction.onClicked.addListener(function() {
-  chromep.tabs.getCurrent(function(){
-      chrome.tabs.create({ url : "/html/album.html?url=" + window.location.href }, function(){
-  });
-    chromep.tabs.executeScript({
+  chromep.tabs.query({
+    active : true
+  })
+  .then(function(){
+      return chromep.tabs.create({
+        url : "/html/album.html?url=" + tabs[0].url
+      });
+  })
+  .then(function(){
+    return chromep.tabs.executeScript({
 	    file: "/js/picrip.js"
-	  })
-	  .then(function(){
-	    return chromep.tabs.executeScript({
-	      file: "/js/get-pics.js"
-	    });
-	  })
+	  });
+  })
+	.then(function)
+	  return chromep.tabs.executeScript({
+	     file: "/js/get-pics.js"
+	  });
+	});
 });
 
 chrome.runtime.onMessage.addListener(function(payload){

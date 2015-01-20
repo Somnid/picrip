@@ -20,9 +20,15 @@ chromep.tabs = (function(){
 
   function executeScript(tabId, injectDetails){
     return new Promise(function(resolve, reject){
-      chrome.tabs.executeScript(tabId, injectDetails, function(result){
-        resolve(result);
-      });
+      if(typeof(tabId) == "string" || typeof(tabId) == "number"){
+        chrome.tabs.executeScript(tabId, injectDetails, function(result){
+          resolve(result);
+        });
+      }else{
+        chrome.tabs.executeScript(tabId, function(result){
+          resolve(result);
+        });
+      }
     });
   }
 
@@ -42,8 +48,26 @@ chromep.tabs = (function(){
     });
   }
 
+  function create(createOptions){
+    return new Promise(function(resolve, reject){
+      chrome.tabs.create(createOptions, function(tab){
+        resolve(tab);
+      })
+    });
+  }
+
+  function query(queryOptions){
+    return new Promise(function(resolve, reject){
+      chrome.tabs.query(queryOptions, function(tabs){
+        resolve(tabs);
+      })
+    });
+  }
+
   return {
     get : get,
+    create : create,
+    query : query,
     getCurrent : getCurrent,
     executeScript : executeScript
   }
