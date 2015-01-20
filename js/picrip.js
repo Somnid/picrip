@@ -18,7 +18,7 @@ var Picrip = (function(){
   }
   function createImageList(images){
     var docfrag = document.createDocumentFragment();
-    images.foreach(function(imageUrl){
+    images.forEach(function(imageUrl){
       var imageElement = document.createElement("img");
       imageElement.src = imageUrl;
       docfrag.appendChild(imageElement);
