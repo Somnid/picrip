@@ -1,0 +1,19 @@
+{
+  "name": "Picrip",
+  "version": "1.0",
+  "description": "Tool for tearing all images out of a webpage",
+  "manifest_version": 2,
+  "background" : {
+    "scripts" : [
+      "js/chromep.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action" : {
+
+  },
+  "permissions" : [
+    "<all_urls>",
+    "tabs"
+  ]
+}
